@@ -40,6 +40,12 @@ This project uses [Playwright](https://playwright.dev/) for end-to-end testing.
 - **View test results in the browser (headed mode is enabled by default):**
   No extra flags needed, as `headless: false` is set in `playwright.config.js`.
 
+  
+- **Running test cases without browser:**
+  ```bash
+  To run tests without opening the browser window (headless mode), set the headless option to true in your playwright.config.js
+  ```
+
 ## Troubleshooting
 
 - If you see an error like  
