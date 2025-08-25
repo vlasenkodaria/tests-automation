@@ -1,0 +1,26 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Dynamic Properties page', () => {
+  test('button becomes enabled after 5 seconds', async ({ page }) => {
+    await page.goto('/dynamic-properties');
+    const button = page.locator('#enableAfter');
+    await expect(button).toBeDisabled();
+    await expect(button).toBeEnabled({ timeout: 7000 });
+  });
+
+  test('button becomes visible after 5 seconds', async ({ page }) => {
+    await page.goto('/dynamic-properties');
+    const button = page.locator('#visibleAfter');
+    await expect(button).toBeHidden();
+    await expect(button).toBeVisible({ timeout: 7000 });
+  });
+
+  test('button has dynamic color', async ({ page }) => {
+    await page.goto('/dynamic-properties');
+    const button = page.locator('#colorChange');
+    const initialColor = await button.evaluate(el => getComputedStyle(el).color);
+    await page.waitForTimeout(6000);
+    const changedColor = await button.evaluate(el => getComputedStyle(el).color);
+    expect(initialColor).not.toBe(changedColor);
+  });
+});
